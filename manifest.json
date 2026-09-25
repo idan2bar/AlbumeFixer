@@ -1,0 +1,14 @@
+{
+  "name": "Albume Fixer",
+  "description": "Remembers the scroll position of the image selection panel in the Albume editor and restores it whenever the panel re-appears.",
+  "version": "1.0",
+  "manifest_version": 3,
+  "permissions": ["storage"],
+  "content_scripts": [
+    {
+      "matches": ["https://editor.albume.co.il/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
