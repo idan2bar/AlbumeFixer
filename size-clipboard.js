@@ -113,9 +113,16 @@ function createButtons() {
 
 // Angular re-renders the properties panel whenever selection changes, so make
 // sure the buttons exist right after the size row every time it appears.
+// With several images selected Albume drops the size row (only the position
+// row remains) but leaves our injected element behind, so remove it there.
 function ensureButtons() {
   const row = document.querySelector(SIZE_CONFIG.SIZE_ROW_SELECTOR);
-  if (!row) return;
+  if (!row) {
+    document
+      .querySelectorAll(`.${SIZE_CONFIG.BUTTONS_CLASS}`)
+      .forEach((buttons) => buttons.remove());
+    return;
+  }
   const next = row.nextElementSibling;
   if (next?.classList.contains(SIZE_CONFIG.BUTTONS_CLASS)) return;
   row.after(createButtons());
