@@ -12,7 +12,15 @@ re-appears, instead of letting it reset to the top.
 4. Open the Albume editor and scroll the image selection panel — the
    position should now survive the panel re-rendering.
 
-## How it works
+## Size copy / paste
+
+When an image is selected, two buttons (העתק / הדבק) appear below the size
+("גודל") width x height fields. Copy remembers both values; Paste applies both
+to the currently selected image. The copied size is kept in
+`chrome.storage.local`, so it survives page reloads. Implemented in
+`size-clipboard.js`.
+
+## How the scroll memory works
 
 The image selection panel is an Angular virtual-scroller
 (`.lbphotosList virtual-scroller.selfScroll`) that gets torn down and
