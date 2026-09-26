@@ -20,6 +20,24 @@ to the currently selected image. The copied size is kept in
 `chrome.storage.local`, so it survives page reloads. Implemented in
 `size-clipboard.js`.
 
+The copy / paste buttons are hidden while several images are selected.
+
+## Align row / column (multi-select)
+
+With several images selected, two buttons (יישור שורה / יישור עמודה) appear
+above Albume's alignment options. They give every selected image the width
+and height of the first one you selected, then press Albume's built-in
+align (vertical-center for a row, horizontal-center for a column) and
+distribute buttons. Since resizing keeps an image's top-left corner fixed,
+the rightmost image (row) or bottom image (column) is also repositioned so
+the row/column keeps its far edge. Implemented in `multi-align.js`.
+
+Albume's canvas (fabric.js) isn't reachable from the extension's isolated
+content-script world, so `canvas-bridge.js` runs in the page's own world
+(`"world": "MAIN"`). It tracks the order images were selected in and selects
+images one at a time / re-selects them all; the two scripts talk through
+`CustomEvent`s on `document`.
+
 ## How the scroll memory works
 
 The image selection panel is an Angular virtual-scroller

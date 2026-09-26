@@ -1,14 +1,20 @@
 {
   "name": "Albume Fixer",
-  "description": "Remembers the scroll position of the image selection panel in the Albume editor, and adds copy/paste buttons for an image's size.",
+  "description": "Remembers the scroll position of the image selection panel in the Albume editor, adds copy/paste buttons for an image's size, and row/column alignment buttons for multi-selection.",
   "version": "1.0",
   "manifest_version": 3,
   "permissions": ["storage"],
   "content_scripts": [
     {
       "matches": ["https://editor.albume.co.il/*"],
-      "js": ["content.js", "size-clipboard.js"],
+      "js": ["content.js", "size-clipboard.js", "multi-align.js"],
       "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://editor.albume.co.il/*"],
+      "js": ["canvas-bridge.js"],
+      "run_at": "document_idle",
+      "world": "MAIN"
     }
   ]
 }
