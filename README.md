@@ -38,6 +38,16 @@ content-script world, so `canvas-bridge.js` runs in the page's own world
 images one at a time / re-selects them all; the two scripts talk through
 `CustomEvent`s on `document`.
 
+## Remove all images
+
+In the add/remove-images modal, a "הסר הכל" button appears above the photo
+grid. Albume only lets you remove one image at a time (hover a thumbnail,
+click its own delete icon), so this button does that for every image in
+turn: it hovers the first thumbnail to reveal its delete icon, clicks it,
+and repeats until the pool is empty. A first click arms it ("לחץ שוב
+לאישור"); a second click within 3 seconds runs it. Implemented in
+`remove-all.js`.
+
 ## How the scroll memory works
 
 The image selection panel is an Angular virtual-scroller
