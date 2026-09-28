@@ -7,7 +7,7 @@
   "content_scripts": [
     {
       "matches": ["https://editor.albume.co.il/*"],
-      "js": ["content.js", "size-clipboard.js", "multi-align.js"],
+      "js": ["content.js", "size-clipboard.js", "multi-align.js", "remove-all.js"],
       "run_at": "document_idle"
     },
     {
