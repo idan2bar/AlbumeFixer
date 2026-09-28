@@ -1,6 +1,6 @@
 {
   "name": "Albume Fixer",
-  "description": "Remembers the scroll position of the image selection panel in the Albume editor, adds copy/paste buttons for an image's size, and row/column alignment buttons for multi-selection.",
+  "description": "Quality-of-life fixes and shortcuts for the Albume editor.",
   "version": "1.0",
   "manifest_version": 3,
   "permissions": ["storage"],
