@@ -7,6 +7,11 @@
 const REMOVE_ALL_CONFIG = {
   // Scoped to the add/remove-photos modal's own photo pool.
   LIST_SELECTOR: 'uploadwindow .photosList',
+  // The row of upload-source buttons (computer, Facebook, Google Photos, ...)
+  // in the modal's footer - our button joins that row instead of sitting
+  // above the thumbnail grid, where it used to add extra height and cause a
+  // second scrollbar.
+  FOOTER_BUTTONS_SELECTOR: 'uploadwindow .globalFooter .leftAreaContent',
   THUMB_SELECTOR: '.image-thumb.mat-tooltip-trigger',
   // Albume uses one icon class for a thumb already placed in the album and
   // another for one still unused, depending on its hover toolbar.
@@ -99,19 +104,16 @@ function makeRemoveAllButton() {
 }
 
 // The modal (and its photo pool) is torn down whenever it closes, taking our
-// injected wrapper with it, so there's nothing to clean up on close - only
-// insertion needs to be (re-)done whenever the pool (re-)appears.
+// injected button with it, so there's nothing to clean up on close - only
+// insertion needs to be (re-)done whenever the footer (re-)appears.
 function ensureRemoveAllButton() {
-  const list = document.querySelector(REMOVE_ALL_CONFIG.LIST_SELECTOR);
-  if (!list) return;
-  if (list.previousElementSibling?.classList.contains(REMOVE_ALL_CONFIG.BUTTON_CLASS)) {
-    return;
-  }
-  const wrapper = document.createElement('div');
-  wrapper.className = REMOVE_ALL_CONFIG.BUTTON_CLASS;
-  wrapper.style.cssText = 'display:flex;justify-content:flex-end;padding:8px 16px 0;';
-  wrapper.append(makeRemoveAllButton());
-  list.before(wrapper);
+  const footerButtons = document.querySelector(REMOVE_ALL_CONFIG.FOOTER_BUTTONS_SELECTOR);
+  if (!footerButtons) return;
+  if (footerButtons.querySelector(`.${REMOVE_ALL_CONFIG.BUTTON_CLASS}`)) return;
+  const button = makeRemoveAllButton();
+  button.classList.add(REMOVE_ALL_CONFIG.BUTTON_CLASS);
+  button.style.margin = '0 12px';
+  footerButtons.append(button);
 }
 
 let removeAllEnsureScheduled = false;
